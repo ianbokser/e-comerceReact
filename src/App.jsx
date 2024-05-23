@@ -1,13 +1,14 @@
 import React from 'react'
+
 import NavBarComponent from './components/NavBarComponent/NavBarComponent'
-import CartWigetComponent from './components/CartWigetComponent/CartWigetComponent'
+import ItemListContainer from './components/ItemListContainer/ItemListContainer'
 
 function App() {
 
   return (
     <>
-      <NavBarComponent><CartWigetComponent></CartWigetComponent></NavBarComponent>
-      
+      <NavBarComponent></NavBarComponent>
+      <ItemListContainer greeting={"hola mundo"}></ItemListContainer>
     </>
   )
 }
