@@ -4,5 +4,6 @@
 
 
 body{
-    background-color: #F3F4F6;
+    background: linear-gradient(135deg, #4a5568, #718096) no-repeat;
+    height: 100vh;
 }
