@@ -1,16 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { getAllCategories } from '../../services/productServices';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import useCategories from '../../hooks/useCategories';
 
 const CategoryComponent = () => {
-    const [categories, setCategories] = useState([]);
+    const { categories } = useCategories();
     const navigate = useNavigate();
-
-    useEffect(() => {
-        getAllCategories()
-        .then((res) => setCategories(res.data))
-        .catch((err) => console.error(err.message));
-    }, []);
 
     const handleCategoryClick = (categorySlug) => {
         navigate(`/category/${categorySlug}`);

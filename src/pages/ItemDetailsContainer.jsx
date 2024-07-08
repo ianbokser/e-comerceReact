@@ -1,26 +1,24 @@
-import React from 'react'
-import NavBarComponent from '../components/NavBarComponent/NavBarComponent'
-import ItemDetailsComponent from '../components/ItemDetailsComponent/ItemDetailsComponent'
+import React from 'react';
+import NavBarComponent from '../components/NavBarComponent/NavBarComponent';
+import ItemDetailsComponent from '../components/ItemDetailsComponent/ItemDetailsComponent';
+import CategoryComponent from '../components/CategoryComponent/CategoryComonent';
 
-import { getProductById } from '../services/productServices'
-import { useParams } from'react-router-dom'
+import LoaderComponent from '../components/LoaderComponent/LoaderComponent';
+import { useParams } from 'react-router-dom';
+import useProductById from '../hooks/useProductById';
 
 export const ItemDetailsContainer = () => {
+    const { id } = useParams();
+    const { product, loading } = useProductById(id);
 
-  const [product, setProduct] = React.useState({})
-
-  const { id } = useParams();
-
-  React.useEffect(() => {
-    getProductById(id)
-    .then((res) => setProduct(res.data))
-    .catch((err) => console.log(err))
-  },[])
-
-  return (
-    <>
-      <NavBarComponent></NavBarComponent>
-      <ItemDetailsComponent product={product}></ItemDetailsComponent>
-    </>
-  )
-}
+    return (
+        <>
+            <NavBarComponent />
+            <div className="flex justify-evenly p-8">
+            {loading && <LoaderComponent />}
+            {!loading && <ItemDetailsComponent product={product} />}
+            <CategoryComponent/>
+            </div>
+        </>
+    );
+};
