@@ -1,27 +1,53 @@
-import { createContext, useState } from "react";
+import React from "react";
 
-export const CartContext = createContext();
+export const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
-    const [cart, setCart] = useState([]);
-
+    const [cart, setCart] = React.useState([]);
+    console.log("Cart Provider", cart);
     const addToCart = (product, quantity) => {
         setCart((prevCart) => {
-            const existingProductIndex = prevCart.findIndex((item) => item.id === product.id);
+            const existingProductIndex = prevCart.findIndex(
+                (p) => p.id === product.id
+            );
             if (existingProductIndex >= 0) {
                 const newCart = [...prevCart];
                 newCart[existingProductIndex] = {
                     ...newCart[existingProductIndex],
-                    quantity: prevCart[existingProductIndex].quantity + quantity,
-
+                    quantity: (newCart[existingProductIndex].quantity || 0) + quantity,
                 };
-                console.log(newCart, existingProductIndex)
                 return newCart;
             } else {
-                return [...prevCart, {...product, quantity}];
+                return [...prevCart, { ...product, quantity }];
             }
         });
     };
 
-    return <CartContext.Provider value={{ cart, addToCart }}>{children}</CartContext.Provider>;
-}
+    const removeFromCart = (product, quantity) => {
+        setCart((prevCart) => {
+            return prevCart.reduce((acc, item) => {
+                if (item.id === product.id) {
+                    const newQuantity = (item.quantity || 0) - quantity;
+                    if (newQuantity > 0) {
+                        acc.push({ ...item, quantity: newQuantity });
+                    }
+                } else {
+                    acc.push(item);
+                }
+                return acc;
+            }, []);
+        });
+    };
+
+    const deleteFromCart = (product) => {
+        setCart((prevCart) => {
+            return prevCart.filter((item) => item.id !== product.id);
+        });
+    };
+
+    return (
+        <CartContext.Provider value={{ cart, addToCart, removeFromCart, deleteFromCart }}>
+            {children}
+        </CartContext.Provider>
+    );
+};

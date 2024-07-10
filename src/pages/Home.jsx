@@ -17,7 +17,7 @@ export const Home = () => {
                     {loading && <LoaderComponent />}
                     {!loading && <ItemListContainer products={products} />}
                 </div>
-                <div>
+                <div className="my-20 mx-8">
                     <CategoryComponent />
                 </div>
             </div>
