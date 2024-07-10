@@ -7,8 +7,9 @@ import ItemListContainer from '../components/ItemListContainer/ItemListContainer
 import CategoryComonent from '../components/CategoryComponent/CategoryComonent'
 
 export const ItemsCategory = () => {
-    const { category } = useParams();
+    const { category } = useParams("categoria");
     const { products } = useProductsByCategory(category);
+    
     return (
         <>
             <NavBarComponent></NavBarComponent>

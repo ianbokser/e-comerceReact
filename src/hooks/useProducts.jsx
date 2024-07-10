@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 
-const useProducts = () => {
+const useProducts = (collectionName) => {
     const [products, setProducts] = useState([]);
     const [ loading, setLoading ] = useState(true);
     
     useEffect(() => {
       const db = getFirestore();
-      const productsCollection = collection(db, 'products');
+      const productsCollection = collection(db, collectionName);
       getDocs(productsCollection)
       .then((querySnapshot) => {
         setProducts(querySnapshot.docs.map((doc) => ({ id: doc.id , ...doc.data() })));

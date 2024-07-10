@@ -6,7 +6,7 @@ import useProducts from '../hooks/useProducts';
 import LoaderComponent from '../components/LoaderComponent/LoaderComponent';
 
 export const Home = () => {
-    const { products, loading } = useProducts();
+    const { products, loading } = useProducts("products");
 
     return(
         <>
