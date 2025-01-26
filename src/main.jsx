@@ -8,7 +8,7 @@ const firebaseConfig = {
   apiKey: "AIzaSyCpAb0OPKd-_unjXOKuhAQL8YMmzFqEbfU",
   authDomain: "coder-ecomerce-1ce86.firebaseapp.com",
   projectId: "coder-ecomerce-1ce86",
-  storageBucket: "coder-ecomerce-1ce86.appspot.com",
+  storageBucket: "coder-ecomerce-1ce86.firebasestorage.app",
   messagingSenderId: "966492326995",
   appId: "1:966492326995:web:b5068f549c62df92aa4aa6"
 };
